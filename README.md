@@ -1,7 +1,7 @@
 Addinclude
 ==========
 
-A utility to add #includes to .c and/or .h files.
+Utility to add #includes to .c and/or .h files.
 
 Easy syntax
 -----------
