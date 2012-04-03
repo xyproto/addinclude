@@ -1,0 +1,68 @@
+.\"             -*-Nroff-*-
+.\"
+.TH "addinclude" 1 "8 Feb 2011" "" ""
+.SH NAME
+addinclude \- adds an include to a C header- or source file
+.SH SYNOPSIS
+.B addinclude
+filename include
+.SH DESCRIPTION
+Addinclude provides a simple way to add includes to C header files or C source files.
+.sp
+Sometimes, a patch is overkill and search and replace does not cut it.
+.sp
+Addinclude adds the includes after the first #ifdef and preferrably together with the other #include lines.
+.sp
+If the header is empty, or there are no #ifdefs or #includes, the include is inserted at the top of the file.
+.SH "EXAMPLES"
+.B addinclude
+- by itself returns errorcode 1 at exit
+.sp
+.B addinclude myfile.h '#include <string.h>'
+- adds #include <string.h> to myfile.h
+.sp
+.B addinclude myfile.h stdlib
+- adds #include <stdlib.h> to myfile.h
+.sp
+.B addinclude myfile.h \'"some.h"\'
+- adds #include "some.h" to myfile.h
+.sp
+.B addinclude --nofix myfile.h \'"#include <some>"\'
+- don't change the include text
+.sp
+.B addinclude --top myfile.h \'"#include <firstpost.h>"\'
+- place the include at the top
+.sp
+.B addinclude --test
+- performs self-testing
+.PP
+.SH OPTIONS
+.TP
+.B \-\-version or \-v
+displays the current version number
+.TP
+.B \-\-help or \-h
+displays brief informative text about usage
+.TP
+.B \-\-nofix or \-n
+don't change the given include text
+.TP
+.B \-\-top or \-t
+add the include at the very top
+.PP
+.SH "WHY"
+.sp
+Aims to solve a tiny problem properly instead of a thousand problems halfway, in true UNIX-spirit
+.sp
+Makes a common case easy to solve
+.sp
+Has clear syntax
+.sp
+Is only one small executable, not a big package
+.SH "SEE ALSO"
+.BR sed (1)
+.SH BUGS
+Only unknown bugs so far.
+.SH AUTHOR
+.B addinclude
+was written by Alexander Rødseth <rodseth@gmail.com>.
