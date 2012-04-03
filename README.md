@@ -3,11 +3,13 @@ Addinclude
 
 A utility to add #includes to .c and/or .h files.
 
-Easy syntax:
+Easy syntax
+-----------
 
     addinclude my.c stdin
 
-Smart placement:
+Smart placement
+---------------
 
     addinclude my.h stdin
 
