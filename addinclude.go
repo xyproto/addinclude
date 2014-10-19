@@ -13,11 +13,11 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io/ioutil"
-	"strings"
-	"flag"
 	"os"
+	"strings"
 )
 
 const (
