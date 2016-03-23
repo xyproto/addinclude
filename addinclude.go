@@ -213,140 +213,6 @@ func addIncludeToFile(filename string, include string, fixinclude bool, at_top b
 }
 
 /*
- * ------------------------ tests --------------------------------
- */
-
-func tests() bool {
-	passes := true
-	passes = passes && test_newl()
-	passes = passes && testrememberHasIfdef()
-	passes = passes && test_fix_inclu()
-	passes = passes && test_testfile1()
-	passes = passes && test_testfile2()
-	passes = passes && test_testfile3()
-	passes = passes && test_testfile4()
-	passes = passes && test_testfile5()
-	passes = passes && test_testfile6()
-
-	if passes {
-		fmt.Println("All tests pass!")
-	} else {
-		fmt.Println("Tests fail.")
-	}
-	return passes
-}
-
-func test_newl() bool {
-	passes := true
-	testcontent1 := "a\r\nb\r\nc"
-	testcontent2 := "a\n\b\nc"
-	source := newSourceCode(testcontent1)
-	passes = passes && source.getNewline() == dosEOL
-	source.set(testcontent2)
-	passes = passes && source.getNewline() == unixEOL
-	fmt.Printf("testnewl passes:\t%t\n", passes)
-	return passes
-}
-
-func testrememberHasIfdef() bool {
-	passes := true
-	testcontent1 := "blabla\n#ifdef ost"
-	testcontent2 := "blablabla"
-	source := newSourceCode(testcontent1)
-	passes = passes && source.hasIfdef()
-	source.set(testcontent2)
-	passes = passes && !source.hasIfdef()
-	fmt.Printf("hasifdef passes:\t%t\n", passes)
-	return passes
-}
-
-func test_testfile1() bool {
-	testcontent := `#ifdef SOMETHING
-
-#include <blubbelubb.h>
-
-#define SOMETHING
-#endif /* SOMETHING */
-`
-	source := newSourceCode(testcontent)
-	passes := source.findInsertPos() == 41
-	fmt.Printf("testfile1 passes:\t%t\n", passes)
-	return passes
-}
-
-func test_testfile2() bool {
-	testcontent := `#include "paraply.h"
-`
-	source := newSourceCode(testcontent)
-	passes := source.findInsertPos() == 20
-	fmt.Printf("testfile2 passes:\t%t\n", passes)
-	return passes
-}
-
-func test_testfile3() bool {
-	testcontent := `#ifdef SOMETHING
-#define SOMETHING
-#endif`
-	source := newSourceCode(testcontent)
-	passes := source.findInsertPos() == 16
-	fmt.Printf("testfile3 passes:\t%t\n", passes)
-	return passes
-}
-
-func test_testfile4() bool {
-	testcontent := ``
-	source := newSourceCode(testcontent)
-	passes := source.findInsertPos() == 0
-	fmt.Printf("testfile4 passes:\t%t\n", passes)
-	return passes
-}
-
-func test_testfile5() bool {
-	testcontent := `#include "jeje.h"
-
-#ifdef SOMETHING
-
-#include "ostebolle.h"
-
-#endif`
-	source := newSourceCode(testcontent)
-	passes := source.findInsertPos() == 59
-	fmt.Printf("testfile5 passes:\t%t\n", passes)
-	return passes
-}
-
-func test_fix_inclu() bool {
-	passes := true
-	a := expandInclude("bolle stdlib") == "#include <stdlib.h>"
-	b := expandInclude("#include <stdlib.h>") == "#include <stdlib.h>"
-	c := expandInclude("include <stdlib.h>") == "#include <stdlib.h>"
-	d := expandInclude("#include \"stdlib.h\"") == "#include \"stdlib.h\""
-	e := expandInclude("stdlib") == "#include <stdlib.h>"
-	f := expandInclude("\"stdlib\"") == "#include \"stdlib.h\""
-	g := expandInclude("<stdlib>") == "#include <stdlib.h>"
-	//fmt.Printf("%t %t %t %t %t %t %t\n", a, b, c, d, e, f, g)
-	passes = passes && a && b && c && d && e && f && g
-	fmt.Printf("fixinclu passes:\t%t\n", passes)
-	return passes
-}
-
-func test_testfile6() bool {
-	testcontent := `#include "jeje.h"
-
-#ifdef SOMETHING
-
-#include "ostebolle.h"
-#include <stdlib.h>
-
-
-#endif`
-	source := newSourceCode(testcontent)
-	passes := source.findInsertPos() == 59
-	fmt.Printf("testfile6 passes:\t%t\n", passes)
-	return passes
-}
-
-/*
  * ------------------------ main --------------------------------
  */
 
@@ -356,7 +222,6 @@ func main() {
 	top_text := "add the include at the top"
 	version_text := "show the current version"
 	help_text := "this brief help"
-	test_text := "perform self testing"
 
 	flag.Usage = func() {
 		fmt.Println("addinclude adds an include to a C header- or source file")
@@ -389,7 +254,6 @@ func main() {
 	var version_short *bool = flag.Bool("v", false, version_text)
 	var help_long *bool = flag.Bool("help", false, help_text)
 	var help_short *bool = flag.Bool("h", false, help_text)
-	var test_long *bool = flag.Bool("test", false, test_text)
 
 	flag.Parse()
 
@@ -397,13 +261,10 @@ func main() {
 	top := *top_long || *top_short
 	version := *version_long || *version_short
 	help := *help_long || *help_short
-	test := *test_long
 
 	args := flag.Args()
 
-	if test {
-		tests()
-	} else if help {
+	if help {
 		flag.Usage()
 	} else if version {
 		fmt.Println(version)
