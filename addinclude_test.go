@@ -69,13 +69,14 @@ func TestTestfile5(t *testing.T) {
 }
 
 func TestFixInclu(t *testing.T) {
-	assert.Equal(t, "#include <stdlib.h>", expandInclude("bolle stdlib"))
-	assert.Equal(t, "#include <stdlib.h>", expandInclude("#include <stdlib.h>"))
-	assert.Equal(t, "#include <stdlib.h>", expandInclude("include <stdlib.h>"))
-	assert.Equal(t, "#include \"stdlib.h\"", expandInclude("#include \"stdlib.h\""))
-	assert.Equal(t, "#include <stdlib.h>", expandInclude("stdlib"))
-	assert.Equal(t, "#include \"stdlib.h\"", expandInclude("\"stdlib\""))
-	assert.Equal(t, "#include <stdlib.h>", expandInclude("<stdlib>"))
+	assert.Equal(t, "#include <stdlib.h>", expandInclude("bolle stdlib", false))
+	assert.Equal(t, "#include <stdlib.h>", expandInclude("#include <stdlib.h>", false))
+	assert.Equal(t, "#include <stdlib.h>", expandInclude("include <stdlib.h>", false))
+	assert.Equal(t, "#include \"stdlib.h\"", expandInclude("#include \"stdlib.h\"", false))
+	assert.Equal(t, "#include <stdlib.h>", expandInclude("stdlib", false))
+	assert.Equal(t, "#include \"stdlib.h\"", expandInclude("\"stdlib\"", false))
+	assert.Equal(t, "#include <stdlib.h>", expandInclude("<stdlib>", false))
+	assert.Equal(t, "#include <memory>", expandInclude("memory", true))
 }
 
 func TestTestfile6(t *testing.T) {
