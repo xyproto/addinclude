@@ -1,0 +1,10 @@
+#!/bin/sh
+go test || exit 1
+go build
+name=addinclude
+version=$(grep versionString "$name.go" | head -1 | cut -d\" -f2 | cut -d\  -f2)
+mkdir "$name-$version"
+cp $name.1 $name COPYING "$name-$version/"
+#gzip "$name-$version/$name.1"
+tar Jcf "$name-$version.tar.xz" "$name-$version/"
+rm -r "$name-$version"
