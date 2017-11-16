@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
-<meta content="text/html; charset=UTF-8" http-equiv="content-type" /><title>Addinclude</title>
+<meta content="text/html; charset=UTF-8" http-equiv="content-type" /><title>Addinclude 1.0</title>
 
-<meta content="Alexander Rødseth" name="author" />
+<meta content="Alexander F Rødseth" name="author" />
 </head>
 <body style="direction: ltr; background-color: rgb(242, 248, 246); color: rgb(0, 0, 0);" alink="red" link="#ff6600" vlink="#993300">
 <div style="margin-left: 40px;"><big style="font-weight: bold;"><big><span style="font-family: Helvetica,Arial,sans-serif;"></span></big></big>
@@ -17,13 +17,13 @@
 is it?</span>
 </div>
 <div style="margin-left: 200px;"><br />
-Addinclude is a small utility to add an include to a C header- or sourcefile, written in <a href="http://golang.org/">Go</a><br />
+Addinclude is a small utility to add an include to a header- or sourcefile, for C or C++, written in <a href="http://golang.org/">Go</a><br />
 <br />
 </div>
 <div style="margin-left: 120px; background-color: white; color: black;"><span style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;">Description</span>
 </div>
 <div style="margin-left: 200px;"><br />
-Addinclude provides a simple way to add includes to C header- or sourcefiles.<br />
+Addinclude provides a simple way to add includes to header- or sourcefiles for C or C++.<br />
 Sometimes, a patch is overkill and search and replace does not cut it.<br />
 Addinclude adds the includes after the first #ifdef and preferrably together with the other #include lines.<br />
 If the header is empty, or there are no #ifdefs or #includes, the include is inserted at the top of the file.<br />
@@ -37,6 +37,7 @@ If the header is empty, or there are no #ifdefs or #includes, the include is ins
 <li><span style="font-family: Courier New,Courier,monospace; font-weight: bold;">addinclude myfile.h '#include &lt;string.h&gt;'</span><br /> - adds #include &lt;string.h&gt; to myfile.h
 <li><span style="font-family: Courier New,Courier,monospace; font-weight: bold;">addinclude myfile.h stdlib</span><br /> - adds #include &lt;stdlib.h&gt; to myfile.h
 <li><span style="font-family: Courier New,Courier,monospace; font-weight: bold;">addinclude myfile.c '"some.h"'</span><br /> - adds #include "some.h" to myfile.c
+<li><span style="font-family: Courier New,Courier,monospace; font-weight: bold;">addinclude file.cpp memory</span><br /> - adds #include &lt;memory&gt; to file.cpp
 </ul>
 </div>
 <div style="margin-left: 120px; color: black; background-color: white;"><span style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;">Why?</span>
@@ -58,16 +59,17 @@ It should be very clear from the syntax what is being done.
 		--help or -h for quick help<br />
 		--nofix or -n to don't touch the include statement given on the commandline<br />
 		--top or -t to put the include at the top<br />
+                --c++ or + to not add .h to the include name
     Addinclude ordinarily only takes a filename and an include<br /><br /></div>
 <div style="margin-left: 120px; color: black; background-color: white;"><span style="font-family: Helvetica,Arial,sans-serif; font-weight: bold;">Installation</span>
 </div>
 <div style="margin-left: 200px;">
     <br />
-    Install the <a href="http://aur.archlinux.org/packages.php?ID=43697">AUR package</a> or download the <a href="http://addinclude.roboticoverlords.org/addinclude-0.9.tbz2">source</a>.<br />
-    There is also <a href="http://addinclude.roboticoverlords.org/addinclude-0.9.zip">a source zip</a> for Windows and <a href="http://addinclude.roboticoverlords.org/addinclude.exe">the binary itself</a>.<br />
+    Install the Arch Linux package with <code>pacman -S addinclude</code> or download the <a href="http://addinclude.roboticoverlords.org/addinclude-1.0.tbz2">source</a>.<br />
+    There is also an older <a href="http://addinclude.roboticoverlords.org/addinclude-0.9.zip">a source zip</a> and <a href="http://addinclude.roboticoverlords.org/addinclude.exe">executable</a> for Windows.<br />
     Here's the <a href="http://github.com/xyproto/addinclude">project page</a>.
     <br />
 </div>
 
-<div style="text-align: right;"><span style="font-size: 0.8em">Alexander Rødseth 2011</span></div>
+<div style="text-align: right;"><span style="font-size: 0.8em">Alexander F Rødseth 2017</span></div>
 </body></html>

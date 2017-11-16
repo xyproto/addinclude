@@ -1,12 +1,13 @@
 Addinclude
 ==========
 
-Utility to add #includes to .c and/or .h files.
+Utility to add `#include`s to `.c` and/or `.h` files.
 
 Easy syntax
 -----------
 
     addinclude my.c stdin
+    addinclude my.cpp memory
 
 Smart placement
 ---------------
@@ -27,7 +28,13 @@ To:
 You can place includes at the top of the file with -t.
 There are several other options.
 
-TODO
-----
-* C++ support
+C++ headers
+-----------
 
+Use the `-c++` flag for not expanding include names when adding them to files not ending with `.cpp`. Example: `memory` will not be expanded to `memory.h`.
+
+General info
+------------
+
+* Version: 1.0
+* License: GPL2

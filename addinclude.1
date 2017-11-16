@@ -1,15 +1,15 @@
 .\"             -*-Nroff-*-
 .\"
-.TH "addinclude" 1 "8 Feb 2011" "" ""
+.TH "addinclude" 1 "16 Nov 2017" "" ""
 .SH NAME
-addinclude \- adds an include to a C header- or source file
+addinclude \- adds an include to a C or C++ header- or source file
 .SH SYNOPSIS
 .B addinclude
 filename include
 .SH DESCRIPTION
-Addinclude provides a simple way to add includes to C header files or C source files.
+Addinclude provides a simple way to add includes to source or header files for C or C++.
 .sp
-Sometimes, a patch is overkill and search and replace does not cut it.
+Sometimes, a patch is overkill and search and replace does not cut it, due to include gards.
 .sp
 Addinclude adds the includes after the first #ifdef and preferrably together with the other #include lines.
 .sp
@@ -18,20 +18,23 @@ If the header is empty, or there are no #ifdefs or #includes, the include is ins
 .B addinclude
 - by itself returns errorcode 1 at exit
 .sp
-.B addinclude myfile.h '#include <string.h>'
-- adds #include <string.h> to myfile.h
+.B addinclude file.h '#include <string.h>'
+- adds #include <string.h> to file.h
 .sp
-.B addinclude myfile.h stdlib
-- adds #include <stdlib.h> to myfile.h
+.B addinclude file.h stdlib
+- adds #include <stdlib.h> to file.h
 .sp
-.B addinclude myfile.h \'"some.h"\'
-- adds #include "some.h" to myfile.h
+.B addinclude file.h \'"some.h"\'
+- adds #include "some.h" to file.h
 .sp
-.B addinclude --nofix myfile.h \'"#include <some>"\'
+.B addinclude --nofix file.h \'"#include <some>"\'
 - don't change the include text
 .sp
-.B addinclude --top myfile.h \'"#include <firstpost.h>"\'
+.B addinclude --top file.h \'"#include <firstpost.h>"\'
 - place the include at the top
+.sp
+.B addinclude --c++ file.cpp memory
+- adds #include <memory> to file.cpp
 .sp
 .B addinclude --test
 - performs self-testing
@@ -65,4 +68,4 @@ Is only one small executable, not a big package
 Only unknown bugs so far.
 .SH AUTHOR
 .B addinclude
-was written by Alexander Rødseth <rodseth@gmail.com>.
+was written by Alexander F Rødseth <xyproto@archlinux.org>.
