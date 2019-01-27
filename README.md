@@ -21,7 +21,7 @@ Changes my.h from:
 
 To:
 
-    #ifdef blabla 
+    #ifdef blabla
     #include <stdin.h>
     #endif
 
@@ -36,5 +36,5 @@ Use the `-c++` flag for not expanding include names when adding them to files no
 General info
 ------------
 
-* Version: 1.0
+* Version: 1.0.1
 * License: GPL2
