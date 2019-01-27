@@ -1,16 +1,3 @@
-/* -*- coding: utf-8 -*-
- * vim: set enc=utf8
- *
- * Alexander F Rødseth <xyproto@archlinux.org>
- * Nov 2010
- * Jan 2011
- * Feb 2011
- * Apr 2011
- * Nov 2017
- *
- * GPL2
- */
-
 package main
 
 import (
@@ -22,7 +9,7 @@ import (
 )
 
 const (
-	versionString = "addinclude 1.0"
+	versionString = "addinclude 1.0.1"
 	ifdef         = "#ifdef"
 	ifndef        = "#ifndef"
 	incl          = "#include"
@@ -118,37 +105,37 @@ func (src *SourceCode) endofline(pos int) int {
 // Try to find an appropriate insertion position for new includes
 func (src *SourceCode) findInsertPos() int {
 	const (
-		HAS_INCLUDE = 1 << iota
-		HAS_IFDEF
-		HAS_IFNDEF
+		hasInclude = 1 << iota
+		hasIfdef
+		hasIfndef
 	)
 
 	n := 0
 	if src.hasInclude() {
-		n |= HAS_INCLUDE
+		n |= hasInclude
 	}
 	if src.hasIfdef() {
-		n |= HAS_IFDEF
+		n |= hasIfdef
 	}
 	if src.hasIfndef() {
-		n |= HAS_IFNDEF
+		n |= hasIfndef
 	}
 
 	pos := 0
 	switch n {
-	case HAS_INCLUDE:
+	case hasInclude:
 		pos = src.firstInclude()
-	case HAS_IFDEF:
+	case hasIfdef:
 		pos = src.firstIfdef()
-	case HAS_IFNDEF:
+	case hasIfndef:
 		pos = src.firstIfndef()
-	case HAS_IFDEF | HAS_IFNDEF:
+	case hasIfdef | hasIfndef:
 		pos = min(src.firstIfdef(), src.firstIfndef())
-	case HAS_INCLUDE | HAS_IFDEF:
+	case hasInclude | hasIfdef:
 		pos = src.firstIncludeAfterIfdef()
-	case HAS_INCLUDE | HAS_IFNDEF:
+	case hasInclude | hasIfndef:
 		pos = src.firstIncludeAfterIfndef()
-	case HAS_INCLUDE | HAS_IFDEF | HAS_IFNDEF:
+	case hasInclude | hasIfdef | hasIfndef:
 		pos = min(src.firstIncludeAfterIfdef(), src.firstIncludeAfterIfndef())
 	default:
 		return 0
@@ -230,17 +217,19 @@ func addIncludeToFile(filename, include string, fixInclude, atTop, cppStyle bool
 
 func main() {
 
-	nofixText := "don't change the include text"
-	topText := "add the include at the top"
-	versionText := "show the current version"
-	cppText := "don't add .h to the include name"
-	verboseText := "more verbose output"
-	helpText := "this brief help"
+	const (
+		nofixText   = "don't change the include text"
+		topText     = "add the include at the top"
+		versionText = "show the current version"
+		cppText     = "don't add .h to the include name"
+		verboseText = "more verbose output"
+		helpText    = "this brief help"
+	)
 
 	flag.Usage = func() {
 		fmt.Println(versionString)
 		fmt.Println()
-		fmt.Println("adds an include to a C header- or source file")
+		fmt.Println("Add an include statement to a C header- or source file.")
 		fmt.Println()
 		fmt.Println("Arguments:")
 		fmt.Println("\tfilename, include")
