@@ -1,7 +1,7 @@
 #!/bin/sh
-go test || exit 1
+go test
 name=addinclude
-version=$(grep versionString "$name.go" | head -1 | cut -d\" -f2 | cut -d\  -f2)
+version=$(grep versionString main.go | head -1 | cut -d\" -f2 | cut -d\  -f2)
 mkdir "$name-$version"
 cp -r -v vendor go.* *.go $name.1 COPYING "$name-$version/"
 tar Jcf "$name-$version.tar.xz" "$name-$version/"
