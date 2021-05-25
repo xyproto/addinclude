@@ -3,6 +3,6 @@ go test || exit 1
 name=addinclude
 version=$(grep versionString "$name.go" | head -1 | cut -d\" -f2 | cut -d\  -f2)
 mkdir "$name-$version"
-cp *.go $name.1 COPYING "$name-$version/"
+cp -r -v vendor go.* *.go $name.1 COPYING "$name-$version/"
 tar Jcf "$name-$version.tar.xz" "$name-$version/"
 rm -r "$name-$version"

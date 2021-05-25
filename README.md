@@ -36,5 +36,5 @@ Use the `-c++` flag for not expanding include names when adding them to files no
 General info
 ------------
 
-* Version: 1.1.0
+* Version: 1.1.1
 * License: GPL2

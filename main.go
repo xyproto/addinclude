@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	versionString = "addinclude 1.1.0"
+	versionString = "addinclude 1.1.1"
 	ifdef         = "#ifdef"
 	ifndef        = "#ifndef"
 	incl          = "#include"
