@@ -1,9 +1,9 @@
 Addinclude
 ==========
 
-Utility to add `#include`s to `.c` and/or `.h` files.
+Utility that can add `#include`s to `.c` and/or `.h` files, with relatively smart placement.
 
-Easy syntax
+Example use
 -----------
 
     addinclude my.c stdin
