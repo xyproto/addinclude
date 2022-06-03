@@ -1,7 +1,7 @@
 Addinclude
 ==========
 
-Utility that can add `#include`s to `.c`, `.cpp and/or `.h` files, with relatively smart placement.
+Utility that can add `#include`s to `.c`, `.cpp` or `.h` files, with relatively smart placement.
 
 Example use
 -----------
