@@ -25,8 +25,7 @@ To:
     #include <stdin.h>
     #endif
 
-You can place includes at the top of the file with -t.
-There are several other options.
+You can place includes at the very top of the file with `-t`. There are several other options.
 
 C++ headers
 -----------
