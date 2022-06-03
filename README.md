@@ -30,7 +30,8 @@ You can place includes at the very top of the file with `-t`. There are several 
 C++ headers
 -----------
 
-Use the `-c++` flag for not expanding include names when adding them to files not ending with `.cpp`. Example: `memory` will not be expanded to `memory.h`.
+* Use the `-c++` flag for not expanding include names when adding them to files not ending with `.cpp`.
+* For example, `memory` will not be expanded to `memory.h`.
 
 General info
 ------------
